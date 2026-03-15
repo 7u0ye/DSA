@@ -13,7 +13,14 @@ public class Main {
         System.out.println(a);
         System.out.println(list.isEmpty());
         System.out.println(list.contains(1));
-        list.clear();
+        System.out.println(list);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
         System.out.println(list);
     }
 

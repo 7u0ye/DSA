@@ -86,6 +86,7 @@ public class arraylist {
 
 
     public void add(int index, int element) {
+        ensureCapacity(index+1);
         rangeCheckAdd(index);
         for (int i = size-1; i >= index; i--) {
             elements[i+1] = elements[i];
@@ -114,4 +115,17 @@ public class arraylist {
             outOfBoundsIndex(index);
         }
     }
+
+    private void ensureCapacity(int Capacity) {
+        int oldCapacity = elements.length;
+        if (oldCapacity >= Capacity) return;
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        int[] newElements = new int[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
+        System.out.println("Capacity: " + newCapacity);
+    }
+
 }
