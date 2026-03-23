@@ -1,29 +1,19 @@
-public class arraylist<E> {
-    private  int size;
+package com.qinyuan;
+
+public class arraylist<E> extends AbstractList<E> {
     private E[] elements;
 
     private static final int DEFAULT_CAPACITY = 10;
-    public static  final int ELEMENT_NOT_FOUND = -1;
 
 
     public arraylist(int capacity) {
-        capacity = (capacity < DEFAULT_CAPACITY)? DEFAULT_CAPACITY : capacity;
+        capacity = capacity < DEFAULT_CAPACITY? DEFAULT_CAPACITY:capacity;
         elements = (E[]) new Object[capacity];
     }
 
 
     public arraylist() {
         this(DEFAULT_CAPACITY);
-    }
-
-
-    public int size() {
-        return size;
-    }
-
-
-    public boolean isEmpty() {
-        return size == 0;
     }
 
 
@@ -56,16 +46,13 @@ public class arraylist<E> {
     }
 
 
-    public boolean contains(E element) {
-        return indexOf(element) != ELEMENT_NOT_FOUND;
-    }
-
 
     public void clear() {
         for (int i = 0; i < size; i++) {
             elements[i] = null;
         }
         size = 0;
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
 
@@ -89,7 +76,20 @@ public class arraylist<E> {
             elements[i-1] = elements[i];
         }
         elements[--size] = null;
+        trim();
         return oldValue;
+    }
+
+    private void trim() {
+        int oldCapacity = elements.length;
+        int newCapacity = oldCapacity >> 1;
+        if(size >= newCapacity || oldCapacity<=DEFAULT_CAPACITY) return;
+        E[] newElements = (E[]) new Object[newCapacity];
+        for(int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
+        System.out.println("Trimming " + oldCapacity + " to " + newCapacity);
     }
 
     public E remove(E element) {
@@ -112,22 +112,7 @@ public class arraylist<E> {
         add(size, element);
     }
 
-    private void rangeCheck(int index) {
-        if (index < 0 || index >= size) {
-            outOfBoundsIndex(index);
-        }
-    }
 
-    private void outOfBoundsIndex(int index) {
-        throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-    }
-
-
-    private void rangeCheckAdd(int index) {
-        if (index < 0 || index > size) {
-            outOfBoundsIndex(index);
-        }
-    }
 
     private void ensureCapacity(int Capacity) {
         int oldCapacity = elements.length;
@@ -140,5 +125,7 @@ public class arraylist<E> {
         elements = newElements;
         System.out.println("Capacity: " + newCapacity);
     }
+
+
 
 }
