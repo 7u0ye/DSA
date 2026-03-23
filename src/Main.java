@@ -1,23 +1,41 @@
 
+import com.qinyuan.Stack;
+import com.qinyuan.circle.CircleLinkedList;
 import com.qinyuan.circle.CircleSingleLinkedList;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        CircleSingleLinkedList list = new CircleSingleLinkedList();
-        list.add(12);
-        list.add(13);
-        list.add(14);
-        list.add(15);
-        list.remove(2);
-        list.add(0,119);
-        System.out.println(list);
+        Stack stack = new Stack();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
     }
-
-    //斐波那契
-//    public static int fib1 (int n) {
+//约瑟夫环
+    public static void Josephus(){
+        CircleLinkedList<Integer> list = new CircleLinkedList();
+        for (int i = 1; i <=10 ; i++) {
+            list.add(i);
+        }
+        list.reset();
+        while(!list.isEmpty()){
+            list.next();
+            list.next();
+            list.next();
+            list.next();
+            System.out.println(list.remove());
+        }
+    }
 //        if (n < 2) {
 //            return n;
 //        }

@@ -6,6 +6,54 @@ public class CircleLinkedList<E> extends AbstractList<E> {
 
     private Node <E> first;
     private Node <E> last;
+    public Node <E> current;
+
+
+    public void reset() {
+        current = first;
+    }
+    public E next(){
+        if(current == null)  return null;
+        current = current.next;
+        return current.element;
+    }
+    public E remove(){
+        if(current == null)  return null;
+        Node <E> next = current.next;
+        E element = remove(current);
+        if(size == 0)  current = null;
+        else current = next;
+        return element;
+    }
+
+    private E remove(Node<E> node){
+        if(size == 1){
+            first = null;
+            last = null;
+        }
+        else {
+            Node<E> prev = node.prev;
+            Node<E> next = node.next;
+            prev.next = next;
+            next.prev = prev;
+            if (node == first) {
+                first = next;
+            }
+            if (node == last) {
+                last = prev;
+            }
+        }
+        size--;
+        return node.element;
+
+
+    }
+
+    @Override
+    public E remove(int index) {
+        rangeCheck(index);
+       return remove(node(index));
+    }
 
     @Override
     public E get(int index) {
@@ -47,30 +95,7 @@ public class CircleLinkedList<E> extends AbstractList<E> {
         size++;
     }
 
-    @Override
-    public E remove(int index) {
-        rangeCheck(index);
-        Node<E> node = node(index);
-        if(size == 1){
-            first = null;
-            last = null;
-        }
-        else {
-            node = node(index);
-            Node<E> prev = node.prev;
-            Node<E> next = node.next;
-            prev.next = next;
-            next.prev = prev;
-            if (index == 0) {
-                first = next;
-            }
-            if (index == size - 1) {
-                last = prev;
-            }
-        }
-        size--;
-        return node.element;
-    }
+
 
     @Override
     public int indexOf(E element) {
