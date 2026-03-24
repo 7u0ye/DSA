@@ -1,25 +1,22 @@
 
+import com.qinyuan.Deque;
+import com.qinyuan.Queue;
 import com.qinyuan.Stack;
 import com.qinyuan.circle.CircleLinkedList;
 import com.qinyuan.circle.CircleSingleLinkedList;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Stack stack = new Stack();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(5);
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
+        Deque<Integer> deque = new Deque<>();
+        deque.enQueueFront(11);
+        deque.enQueueFront(12);
+        deque.enQueueRear(13);
+        deque.enQueueRear(14);
+        while(!deque.isEmpty()){
+            System.out.println(deque.deQueueFront());
+        }
     }
 //约瑟夫环
     public static void Josephus(){
