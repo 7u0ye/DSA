@@ -17,4 +17,7 @@ public class Queue<E> {
     public E front() {
         return list.get(0);
     }
+    public void clear(){
+        list.clear();
+    }
 }
